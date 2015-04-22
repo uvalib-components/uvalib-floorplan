@@ -1,0 +1,17 @@
+{
+  "name": "uvalib-floorplan",
+  "version": "0.0.0",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "uvalib-floorplan.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4",
+    "paper-ripple": "Polymer/paper-ripple"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.2.3"
+  }
+}
