@@ -1,23 +1,25 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../../bower_components/core-selector/core-selector.html">
-<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../core-selector/core-selector.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
 
 <!--
-Element providing dynamic floorplan imagery for the Library.
+Element providing solution to no problem in particular.
 
 ##### Example
 
-    <uvalib-floorplan></uvalib-floorplan>
+    <uvalib-floorplan-alderman></uvalib-floorplan-alderman>
 
-@element uvalib-floorplan
-@blurb Element providing dynamic floorplan imagery for the Library.
+@element uvalib-floorplan-alderman
+@blurb Element providing solution to no problem in particular.
 @status alpha
-@homepage http://uvalib-components.github.io/uvalib-floorplan
+@homepage http://dougchestnut.github.io/uvalib-floorplan-alderman
 -->
-<polymer-element name="uvalib-floorplan" attributes="library floor selectedArea">
+<polymer-element name="uvalib-floorplan" attributes="selectedFloor floors selectedDest selectedStep dests" layout horizontal>
+
   <template>
-    <link rel="stylesheet" href="uvalib-floorplan.css">
-    
+
+    <link rel="stylesheet" href="uvalib-floorplan.css" />
+
 <div id="svgContainer" flex>
 
 <!-- 
@@ -3786,14 +3788,10 @@ Element providing dynamic floorplan imagery for the Library.
 </svg>
 </div>
 
-
-
-
-
   </template>
   <script>
-    
-    Polymer('uvalib-floorplan-alderman', {
+
+    Polymer('uvalib-floorplan', {
 
         selectedFloor: '4',
         floors: ['4'],
@@ -3801,6 +3799,7 @@ Element providing dynamic floorplan imagery for the Library.
         paths: [],
         selectedDest: null,
         dests: [],
+        selectedStep: null,
 
         class1: '',
         class1M: '',
@@ -3818,9 +3817,6 @@ Element providing dynamic floorplan imagery for the Library.
         bottomStackedFloor: null,
         allFloors: ['5M','5','4M','4','3M','3','2M','2','1M','1'],
 
-        domReady: function(){
-//            this.SVGhelpers();
-        },
         ready: function(){
             this.svg = this.$.svgContainer.querySelector('svg');
             window.addEventListener('polymer-ready', this.SVGhelpers.bind(this) );
@@ -3832,13 +3828,10 @@ Element providing dynamic floorplan imagery for the Library.
             this.svg.style.display = "block";
         },
 
-        makeClass: function(floor){
-          if (this.allFloors.indexOf(floor) >= 0) {
-            var clas = this[floor+'clas'];
-          } else {
+        makeClass: function(){
             for (var i=0; i<this.floors.length; i++) {
               var floor = this.floors[i],
-                  showdests = (this.dests.length>0)?'dests':'';
+                  showdests = (this.dests && this.dests.length>0)?'dests':'';
               if (floor == this.selectedFloor)
                 this['class'+floor] = 'show selected '+showdests;
               else
@@ -3847,21 +3840,18 @@ Element providing dynamic floorplan imagery for the Library.
             for (var i=0; i<this.allFloors.length; i++)
               if (this.floors.indexOf(this.allFloors[i]) == -1)  // floor shouldn't be shown
                 this['class'+this.allFloors[i]] = '';
-          }
         },
-
+        selectedStepChanged: function(old,neu){
+          this.selectedDest = this.dests[neu].dest;
+          this.selectedFloor = this.dests[neu].floor;
+        },
         selectedDestChanged: function(old,neu){
           this.makeClass();
-        },
-        selectedAreaChanged: function(old,neu){
-          if(neu){
-            foo='bar';
-          }
         },
         destsChanged: function(old,neu){
           this.makeClass();
           // hide old dests
-          if (old && old.length) {
+          if (old && old.length && old[0].dest) {
             for (var i=0; i<old.length; i++) {
               var floor = this.$[old[i].floor],
                   dest = old[i].dest,
@@ -3916,10 +3906,11 @@ Element providing dynamic floorplan imagery for the Library.
           if (!neu) return;
           this.makeClass();
         }
+
     });
 
-
   </script>
+
 </polymer-element>
 
 
@@ -3928,14 +3919,14 @@ Element providing a floor picker widget.
 
 ##### Example
 
-    <uvalib-floorpicker></uvalib-floorpicker>
+    <uvalib-floorpicker-alderman></uvalib-floorpicker-alderman>
 
-@element uvalib-floorpicker
+@element uvalib-floorpicker-alderman
 @blurb Element providing a floor picker widget.
 @status alpha
-@homepage http://uvalib-components.github.io/uvalib-floorplan
+@homepage http://uvalib-components.github.io/uvalib-floorplan-alderman
 -->
-<polymer-element name="uvalib-floorpicker" attributes="library floors vertical horizontal disabled selectedFloor">
+<polymer-element name="uvalib-floorpicker" attributes="vertical horizontal floors disabled selectedFloor">
 
   <template>
 
@@ -3996,7 +3987,7 @@ Element providing a floor picker widget.
 
   <script>
 
-    Polymer('uvalib-floorpicker-alderman', {
+    Polymer('uvalib-floorpicker', {
       /**
        * The `vertical` attribute sets an initial direction
        * 
@@ -4019,5 +4010,4 @@ Element providing a floor picker widget.
   </script>
 
 </polymer-element>
-
 

@@ -9,7 +9,8 @@
   "main": "uvalib-floorplan.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^0.5.4",
-    "paper-ripple": "Polymer/paper-ripple"
+    "paper-ripple": "Polymer/paper-ripple",
+    "core-selector": "Polymer/core-selector"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.2.3"
