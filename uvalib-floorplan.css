@@ -111,5 +111,14 @@ svg > #wrapper > g.show {
     opacity: 1;
 } 
 
+polygon, .outline > path {
+    fill: white;
+    stroke: #000000;
+}
+
+path, polyline, line {
+    fill: none;
+    stroke: #000000;
+}
 
 
