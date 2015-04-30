@@ -36,7 +36,7 @@ svg > #wrapper > g.show {
 }
 #wrapper > g > g > g { display:none; opacity: 1;}
 #wrapper > g > g > g.parent_outline { display: block; opacity: .5;}
-#wrapper > g > g > g.restrooms { display:block; opacity: 1;}
+#wrapper > g > g > g.restrooms { display:block; opacity: 0;}
 #wrapper > g > g > g.elevator_and_stairs { display:block; opacity: 1;}
 #wrapper > g > g > g.negative_space { display:block; opacity: 1;}
 #wrapper > g > g > g.interior_walls { display:block; opacity: 1;}
