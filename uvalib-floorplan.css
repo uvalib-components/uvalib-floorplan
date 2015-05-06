@@ -111,14 +111,31 @@ svg > #wrapper > g.show {
     opacity: 1;
 } 
 
+
+/* Cleanup */
 polygon, .outline > path {
     fill: white;
     stroke: #000000;
 }
-
 path, polyline, line {
     fill: none;
     stroke: #000000;
 }
-
-
+#Nil_pattern > .dark-check {fill:#ccc;}
+#Nil_pattern > .light-check {fill:white;}
+.restrooms rect, .restrooms polygon, .room_nos path, .room_nos rect, .room_nos polygon, .call_numbers rect, .call_numbers polygon, .call_numbers path {fill:#FCEE23;}
+.room_nos text, .call_numbers text, .negative_space text {font-size: 8px; fill:#010101;}
+.elevator_and_stairs rect {fill:#D1252B}
+.elevator_and_stairs text {fill:#FFFFFF; font-size:8px;}
+.elevator_and_stairs polyline {fill:none; stroke:#D1252B; stroke-width:2;}
+.interior_walls polyline, .interior_walls line, .interior_walls path {stroke-miterlimit:10;}
+.paths polyline {fill:none; stroke:#2E368F; stroke-width:2; stroke-miterlimit:10}
+.paths polygon {fill:#2E368F;}
+.paths path {fill:#2E368F;}
+.paths text {fill:#FFFFFF; font-size:10.9881px;}
+.main_text text {fill:#010101; font-size:10px}
+.main_text path, .main_text ellipse, .main_text polygon {fill:#231F20;}
+.title_text text {fill:#010101; font-size:14px;}
+.parent_outline polyline {stroke-miterlimit:10;}
+.outline line, .outline polyline {stroke-miterlimit:10;}
+.outline path {stroke:#000000; stroke-miterlimit:10;}
