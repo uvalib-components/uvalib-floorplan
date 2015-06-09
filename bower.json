@@ -1,18 +1,29 @@
 {
   "name": "uvalib-floorplan",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "authors": [
+    "Doug Chestnut <dougchestnut@gmail.com>"
+  ],
+  "description": "An element providing animated floorplans and paths within.",
   "keywords": [
-    "seed",
+    "web-component",
     "polymer",
-    "web-components"
+    "seed"
   ],
   "main": "uvalib-floorplan.html",
+  "license": "MIT",
+  "homepage": "https://github.com/uvalib-components/uvalib-floorplan/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
   "dependencies": {
-    "polymer": "Polymer/polymer",
-    "paper-ripple": "Polymer/paper-ripple",
-    "core-selector": "Polymer/core-selector"
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
   }
 }
