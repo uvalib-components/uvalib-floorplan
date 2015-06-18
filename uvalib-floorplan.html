@@ -3742,11 +3742,11 @@ path, polyline, line {
     is: 'uvalib-floorplan',
 
     properties: {
-      selectedFloor: { type:String, default:'4', observer:'selectedFloorChanged'},
-      floors: { type:Array, default:['4'], observer:'floorsChanged'},
-      selectedDest: { type:String, default:null, observer:'selectedDestChanged'},
-      selectedStep: { type:String, default:null, observer:'selectedStepChanged'},
-      dests: { type:Array, default:[], observer:'destsChanged'}
+      selectedFloor: { type:String, value:'4', observer:'selectedFloorChanged'},
+      floors: { type:Array, value:['4'], observer:'floorsChanged'},
+      selectedDest: { type:String, observer:'selectedDestChanged'},
+      selectedStep: { type:String, observer:'selectedStepChanged'},
+      dests: { type:Array, observer:'destsChanged'}
     },
 
     // Element Lifecycle
