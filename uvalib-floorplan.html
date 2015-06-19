@@ -3742,8 +3742,8 @@ path, polyline, line {
     is: 'uvalib-floorplan',
 
     properties: {
-      selectedFloor: { type:String, value:'4', observer:'selectedFloorChanged'},
-      floors: { type:Array, value:['4'], observer:'floorsChanged'},
+      selectedFloor: { type:String, value:'4', observer:'selectedFloorChanged', notify:true},
+      floors: { type:Array, value:['4'], observer:'floorsChanged', notify:true},
       selectedDest: { type:String, observer:'selectedDestChanged'},
       selectedStep: { type:String, observer:'selectedStepChanged'},
       dests: { type:Array, observer:'destsChanged'}
