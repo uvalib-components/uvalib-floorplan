@@ -3780,6 +3780,7 @@ path, polyline, line {
     },
 
     makeClass: function(){
+      if (!this.floors) this.floors=[this.selectedFloor];
       for (var i=0; i<this.floors.length; i++) {
               var floor = this.floors[i],
                   showdests = (this.dests && this.dests.length>0)?'dests':'';
