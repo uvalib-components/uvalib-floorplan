@@ -3849,9 +3849,12 @@ path, polyline, line {
           }
     },
     selectedFloorChanged: function(old,neu){
-          if(neu && neu.length){
+        if (neu)
+          if(neu.length){
             this.makeClass();
           }
+        else
+            this.selectedFloor = old;
     },
     floorsChanged: function(old,neu){
           if (!neu) return;
