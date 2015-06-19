@@ -175,7 +175,7 @@ path, polyline, line {
   </style>
 
   <template>
-
+<h1>{{class4}}</h1><h2>Hello</h2>
 <div id="svgContainer">
 
 <!-- 
@@ -3746,27 +3746,31 @@ path, polyline, line {
       floors: { type:Array, value:function() { return ['4']; }, observer:'floorsChanged', notify:true},
       selectedDest: { type:String, observer:'selectedDestChanged'},
       selectedStep: { type:String, observer:'selectedStepChanged'},
-      dests: { type:Array, observer:'destsChanged'}
+      dests: { type:Array, observer:'destsChanged'},
+      allFloors: {type:Array, value:function() { return  ['5M','5','4M','4','3M','3','2M','2','1M','1']; }}
+    },
+
+    hostAttributes: {
+      selectedPath: null,
+      paths: [],
+      class1: '',
+      class1M: '',
+      class2: '',
+      class2M: '',
+      class3: '',
+      class3M: '',
+      class4: '',
+      class4M: '',
+      class5: '',
+      class5M: '',
+      topStackedFloor: null,
+      bottomStackedFloor: null,
+      allFloors: ['5M','5','4M','4','3M','3','2M','2','1M','1']
     },
 
     // Element Lifecycle
 
     ready: function() {
-      this.selectedPath = null;
-      this.paths = [];
-      this.class1 = '';
-      this.class1M = '';
-      this.class2 = '';
-      this.class2M = '';
-      this.class3 = '';
-      this.class3M = '';
-      this.class4 = '';
-      this.class4M = '';
-      this.class5 = '';
-      this.class5M = '';
-      this.topStackedFloor = null;
-      this.bottomStackedFloor = null;
-      this.allFloors = ['5M','5','4M','4','3M','3','2M','2','1M','1'];
 
       this.svg = this.$.svgContainer.querySelector('svg');
       window.addEventListener('WebComponentsReady', this.SVGhelpers.bind(this) );
@@ -3780,6 +3784,7 @@ path, polyline, line {
     },
 
     makeClass: function(){
+      if (!this.allFloors) this.allFloors=this.getAttribute('allfloors');
       if (!this.floors) this.floors=[this.selectedFloor];
       for (var i=0; i<this.floors.length; i++) {
               var floor = this.floors[i],
