@@ -3774,7 +3774,8 @@ path, polyline, line {
 
     SVGhelpers: function(){
       // resize the svg to match its container
-      this.svg.setAttribute('height', this.$.svgContainer.clientHeight-20);
+      if(this.$.svgContainer.clientHeight)
+        this.svg.setAttribute('height', this.$.svgContainer.clientHeight-20);
       this.svg.style.display = "block";
     },
 
