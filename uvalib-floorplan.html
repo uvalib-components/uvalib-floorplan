@@ -3743,7 +3743,7 @@ path, polyline, line {
 
     properties: {
       selectedFloor: { type:String, value:'4', observer:'selectedFloorChanged', notify:true},
-      floors: { type:Array, value:['4'], observer:'floorsChanged', notify:true},
+      floors: { type:Array, value:function() { return ['4']; }, observer:'floorsChanged', notify:true},
       selectedDest: { type:String, observer:'selectedDestChanged'},
       selectedStep: { type:String, observer:'selectedStepChanged'},
       dests: { type:Array, observer:'destsChanged'}
