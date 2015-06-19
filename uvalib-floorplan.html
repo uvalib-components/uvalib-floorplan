@@ -3850,16 +3850,12 @@ path, polyline, line {
           }
     },
     selectedFloorChanged: function(old,neu){
-        if (neu) {
-          if(neu.length){
-            this.makeClass();
-          }
-        } else
-            this.selectedFloor = old;
+        if (!neu) this.selectedFloor = old;
+        this.makeClass();
     },
     floorsChanged: function(old,neu){
-          if (!neu) return;
-          this.makeClass();
+        if (!neu) this.floors = old;
+        this.makeClass();
     }
 
 
