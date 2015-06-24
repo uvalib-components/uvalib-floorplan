@@ -199,7 +199,7 @@ path, polyline, line {
   <rect class="dark-check" x='10' y='10' width='10' height='10'/>
 </pattern>
 
-<g id="wrapper" class$="{{printIf(dests.length>0, 'dests')}}">
+<g id="wrapper" class$="{{printIfCount(dests.length, 'dests')}}">
 
 <g id="1" class$="{{class1}}"><g>
   <g class="outline">
@@ -3861,8 +3861,8 @@ path, polyline, line {
         if (!neu) this.floors = old;
         this.makeClass();
     },
-    printIf: function(expression, value){
-        return (expression)?value:'';
+    printIfCount: function(number, value){
+        return (number>0)?value:'';
     }
 
 
