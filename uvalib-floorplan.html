@@ -41,7 +41,10 @@ svg {
 
 /* hide all floors by default */
 svg > #wrapper > g { opacity: .15; transition:all ease-in-out 1s;}
-svg > #wrapper.dests > g { opacity: 0; transition:all ease-in-out 1s;}
+svg > #wrapper.dests > g { 
+/*  opacity: 0;  */
+  transition:all ease-in-out 1s;
+}
 
 svg > #wrapper > g.selected text { display: block; }
 svg > #wrapper > g text { display: none; }
@@ -176,6 +179,14 @@ path, polyline, line {
 
   <template>
 <div id="svgContainer">
+
+<!--
+<div>selectedFloor: <span>{{selectedFloor}}</span></div>
+<div>floors: <span>{{floors}}</span></div>
+<div>selectedDest: <span>{{selectedDest}}</span></div>
+<div>selectedStep: <span>{{selectedStep}}</span></div>
+<div>dests: <span>{{dests}}</span></div>
+-->
 
 <!-- 
  fixes from ill generated svg:
@@ -3742,7 +3753,8 @@ path, polyline, line {
 
     properties: {
       selectedFloor: { type:String, value:'4', observer:'selectedFloorChanged', notify:true},
-      floors: { type:Array, value:function() { return ['4']; }, observer:'floorsChanged', notify:true},
+//      floors: { type:Array, value:function() { return ['4']; }, observer:'floorsChanged', notify:true},
+      floors: {type:Array, ovserver:'floorsChanged'},
       selectedDest: { type:String, observer:'selectedDestChanged'},
       selectedStep: { type:String, observer:'selectedStepChanged'},
       dests: { type:Array, observer:'destsChanged'},
@@ -3770,7 +3782,8 @@ path, polyline, line {
     // Element Lifecycle
 
     ready: function() {
-
+//      this.selectedFloor='4';
+//      this.floors=['4']
       this.svg = this.$.svgContainer.querySelector('svg');
       window.addEventListener('WebComponentsReady', this.SVGhelpers.bind(this) );
     },
@@ -3798,38 +3811,25 @@ path, polyline, line {
                 this['class'+this.allFloors[i]] = '';
     },
 
-    selectedStepChanged: function(old,neu){
-          this.selectedDest = this.dests[neu].dest;
-          this.selectedFloor = this.dests[neu].floor;
+    selectedStepChanged: function(){
+      var step = this.selectedStep;
+      if (step>=0&&step<=2) {
+        this.selectedDest = this.dests[step].dest;
+        this.selectedFloor = this.dests[step].floor;
+      }
     },
-    selectedDestChanged: function(old,neu){
+    selectedDestChanged: function(neu,old){
           this.makeClass();
     },
-    destsChanged: function(old,neu){
+    destsChanged: function(neu,old){
           this.makeClass();
           // hide old dests
-          if (old && old.length && old[0].dest) {
-            for (var i=0; i<old.length; i++) {
-              var floor = this.$[old[i].floor],
-                  dest = old[i].dest,
-                  area = old[i].area;
-              if (dest == 'elevator') {
-                floor.querySelector('.elevator_and_stairs .'+area+'_elevator').className.baseVal=area+'_elevator';
-                this.$['PATH_TO_'+area.toUpperCase()+'_ELEVATOR'].className.baseVal='';
-              }
-              if (i==2) { // if 3 steps need to unhighlight the elevator on this floor
-                floor.querySelector('.elevator_and_stairs .'+area+'_elevator').className.baseVal=area+'_elevator';
-              }
-              if (this.$[dest+'_path']) {
-                this.$[dest+'_path'].className.baseVal='';
-              }
-              if (this.$[dest.replace('-','_')+'_path']) {
-                this.$[dest.replace('-','_')+'_path'].className.baseVal='';
-              }
-              if (this.$[dest.replace('-','_')]) {
-                this.$[dest.replace('-','_')].className.baseVal='';
-              }
-            }
+          var d = this.querySelectorAll('.dest');
+          for (var i=0; i<d.length; i++) {
+            d[i].className.baseVal = d[i].className.baseVal.replace('dest','');
+            d[i].className.baseVal = d[i].className.baseVal.replace(' 0','');
+            d[i].className.baseVal = d[i].className.baseVal.replace(' 1','');
+            d[i].className.baseVal = d[i].className.baseVal.replace(' 2','');
           }
           if(neu && neu.length){
             // show new dests
@@ -3838,26 +3838,26 @@ path, polyline, line {
                   dest = neu[i].dest,
                   area = neu[i].area;
               if (dest == 'elevator') {
-                floor.querySelector('.elevator_and_stairs .'+area+'_elevator').className.baseVal=area+'_elevator dest';
-                this.$['PATH_TO_'+area.toUpperCase()+'_ELEVATOR'].className.baseVal='dest';
+                floor.querySelector('.elevator_and_stairs .'+area+'_elevator').className.baseVal=area+'_elevator dest '+(i+1);
+                this.$['PATH_TO_'+area.toUpperCase()+'_ELEVATOR'].className.baseVal='dest '+i;
               }
               if (i==2) { // if 3 steps need to highlight the elevator on this floor
-                floor.querySelector('.elevator_and_stairs .'+area+'_elevator').className.baseVal=area+'_elevator dest';
+                floor.querySelector('.elevator_and_stairs .'+area+'_elevator').className.baseVal=area+'_elevator dest '+i;
               }
               if (this.$[dest.replace('-','_')+'_path']) {
-                this.$[dest.replace('-','_')+'_path'].className.baseVal='dest';
+                this.$[dest.replace('-','_')+'_path'].className.baseVal='dest '+i;
               }
               if (this.$[dest.replace('-','_')]) {
-                this.$[dest.replace('-','_')].className.baseVal='dest';
+                this.$[dest.replace('-','_')].className.baseVal='dest '+i;
               }
             }
           }
     },
-    selectedFloorChanged: function(old,neu){
+    selectedFloorChanged: function(neu,old){
         if (!neu) this.selectedFloor = old;
         this.makeClass();
     },
-    floorsChanged: function(old,neu){
+    floorsChanged: function(neu,old){
         if (!neu) this.floors = old;
         this.makeClass();
     },
